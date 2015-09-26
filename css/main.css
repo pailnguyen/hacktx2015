@@ -1,4 +1,4 @@
-@charset "utf-8"
+@charset "utf-8";
 @import url(http://fonts.googleapis.com/css?family=Lato:700|Open+Sans);
 
 body {
@@ -8,6 +8,10 @@ body {
 h1, h2, h3 {
 	font-family: "Lato", sans-serif;
 	font-weight: 700;
+}
+
+footer {
+	font-size: 0.4em;
 }
 
 .container {
@@ -21,29 +25,31 @@ h1, h2, h3 {
 	font-size: 2em;
 	font-weight: bold;
 	text-align: center;
+	margin: 0 auto;
+	width: 10em;
 }
 
 .title, .typed-element {
 	display: inline;
 }
 
-.typed-cursor{
+.typed-cursor {
 	opacity: 1;
 	-webkit-animation: blink 1s infinite;
 	-moz-animation: blink 1s infinite;
 	animation: blink 1s infinite;
 }
-@keyframes blink{
+@keyframes blink {
 	0% { opacity:1; }
 	50% { opacity:0; }
 	100% { opacity:1; }
 }
-@-webkit-keyframes blink{
+@-webkit-keyframes blink {
 	0% { opacity:1; }
 	50% { opacity:0; }
 	100% { opacity:1; }
 }
-@-moz-keyframes blink{
+@-moz-keyframes blink {
 	0% { opacity:1; }
 	50% { opacity:0; }
 	100% { opacity:1; }
