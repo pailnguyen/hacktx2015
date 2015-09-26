@@ -2,11 +2,22 @@
 <html>
 	<head>
 		<title>HackTX 2015 Demo</title>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+		<script type="text/javascript" src="js/typed.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(".typed-element").typed({
+					strings: ["HackTX 2015"],
+					loop: false,
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<div class="container">
 			<header>
-				
+				<div class="title typed-element"></div>
 			</header>
 			<section class="content">
 				<p>Test</p>
