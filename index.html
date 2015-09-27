@@ -3,44 +3,67 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="apple-mobile-web-app-capable" content="yes">
+		<link rel="apple-touch-startup-image" href="img/startup.png">
 		<title>HackTX 2015 Demo</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 		<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
 		<script type="text/javascript" src="js/typed.js"></script>
 		<script type="text/javascript" src="js/GreatCircle.js"></script>
 		<script type="text/javascript">
-		if(navigator.geolocation) {
-			var geolocation = window.navigator.geolocation;
-			var lat1 = 0;
-			var lon1 = 0;
-			var lat2 = 11.6;
-			var lon2 = 43.1667;
-			geolocation.getCurrentPosition(function(position) {
-			    // console.log(position);
-			    lat1 = position.coords.latitude;
-			    lon1 = position.coords.longitude;
+			if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPad') != -1) {
+				if (navigator.standalone && navigator.geolocation) {
+					console.log("case 1");
+					run();
+				}
+				else {
+					console.log("case 2");
+					$(function(){
+						$(".typed-element").typed({
+							strings: ["<br>The most technologically advanced application of HackTX 2015. If you are on an iOS device, please add this web app to your home screen."],
+							typeSpeed: 50,
+							loop: false,
+							loopCount: false,
+						});
+					});
+				}
+			}
+			else if(navigator.geolocation) {
+				console.log("case 3");
+				run();
+			}
+			else {
+				console.log("case 4");
+				alert("Geolocation is not available!");
 				$(function(){
 					$(".typed-element").typed({
-						strings: ["<br>HackTX 2015^500", "<br>Your distance to Djibouti is "+ Math.round(GreatCircle.distance(lat1, lon1, lat2, lon2, "MI")) + " mi."],
+						strings: ["<br>HackTX 2015^500", "<br>Your browser does not support geolocation."],
 						typeSpeed: 50,
 						loop: false,
 						loopCount: false,
 					});
 				});
-			})			
-		}
-		else {
-			alert("Geolocation is not available!");
-			$(function(){
-				$(".typed-element").typed({
-					strings: ["<br>HackTX 2015^500", "<br>Your browser does not support geolocation."],
-					typeSpeed: 50,
-					loop: false,
-					loopCount: false,
-				});
-			});
-		}
-	</script>
+			}
+			function run() {
+				var geolocation = window.navigator.geolocation;
+				var lat1 = 0;
+				var lon1 = 0;
+				var lat2 = 11.6;
+				var lon2 = 43.1667;
+				geolocation.getCurrentPosition(function(position) {
+				    // console.log(position);
+				    lat1 = position.coords.latitude;
+				    lon1 = position.coords.longitude;
+					$(function(){
+						$(".typed-element").typed({
+							strings: ["<br>HackTX 2015^500", "<br>Your distance to Djibouti is "+ Math.round(GreatCircle.distance(lat1, lon1, lat2, lon2, "MI")) + " mi."],
+							typeSpeed: 50,
+							loop: false,
+							loopCount: false,
+						});
+					});
+				})
+			}
+		</script>
 	</head>
 	<body>
 		<div class="container">
