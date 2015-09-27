@@ -1,0 +1,105 @@
+@charset "utf-16";
+@import url(http://fonts.googleapis.com/css?family=Lato:700|Open+Sans);
+
+body {
+	font-family: "Open Sans", sans-serif;
+	background-image: url(../img/rohit.png);
+	background-size: cover;
+	margin: 0;
+	color: black;
+	text-align: center;
+}
+
+canvas {
+	padding: 0;
+	margin: 0 auto;
+	display: block;
+}
+
+h1, h2, h3 {
+	font-family: "Lato", sans-serif;
+	font-weight: 700;
+}
+
+footer {
+	margin: 0 auto;
+	text-align: center;
+	width: 200px;
+	font-size: 0.5em;
+}
+
+p {
+	background: white;
+}
+
+.container {
+	margin: 0 auto;
+	max-width: 760px;
+	font-size: 2em;
+}
+.content {
+	margin: 0;
+}
+
+.card {
+	height: 200px;
+	width: 100%;
+	border: 1px solid black;
+	background-color: blue;
+	transform: translate(0px, 0px);
+}
+.dropzone {
+	width: 32%;
+	border: dashed 1px black;
+	display: inline-block;
+	height: 200px;
+	margin: 1px;
+	transition: background-color 0.2s;
+}
+.drop-target {
+	background-color: #29e;
+	border-color: #fff;
+	border-style: solid;
+}
+.holding-area {
+	width: 32%;
+	border: dashed 1px black;
+	display: inline-block;
+	height: 200px;
+}
+
+.title {
+	font-family: "Lato", sans-serif;
+	font-size: 2em;
+	font-weight: bold;
+	text-align: center;
+	margin: 0 auto;
+	width: 10em;
+	background: white;
+}
+
+.title, .typed-element {
+	display: inline;
+}
+
+.typed-cursor {
+	opacity: 1;
+	-webkit-animation: blink 1s infinite;
+	-moz-animation: blink 1s infinite;
+	animation: blink 1s infinite;
+}
+@keyframes blink {
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-webkit-keyframes blink {
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-moz-keyframes blink {
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}

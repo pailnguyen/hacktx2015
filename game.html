@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>HackTX 2015 Demo</title>
+		<link rel="stylesheet" type="text/css" href="css/game.css">
+		<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+		<script type="text/javascript" src="js/typed.js"></script>
+		<script type="text/javascript" src="js/headtrackr.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(".typed-element").typed({
+					strings: ["HackTX 2015"],
+					typeSpeed: 100, // millseconds between characters
+					loop: false,
+					loopCount: false,
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<div class="title typed-element"></div>
+			</header>
+			<section class="content">
+				<canvas id="inputCanvas" width="320" height="240" style="display: none"></canvas>
+				<video id="inputVideo" autoplay loop width="320" height="240" style="display: none"></video>
+				<canvas id="overlay" width="320" height="240"></canvas>
+				<canvas id="debug" width="320" height="240"></canvas>
+				<canvas id="gameCanvas" width="760" height="800"></canvas>
+				<img src="img/xavier.png" id="xavier" style="display: none">
+				<script type="text/javascript">
+					var percentage = 0;
+					var player = {
+						rectX: percentage*760-50, 
+						rectY: 700, 
+						rectWidth: 100, 
+						rectHeight: 100
+					};
+					var bullets = [];
+					for (var i = 0; i < 20; i++) {
+						var bullet = {
+							rectX: Math.random()*1000-5, 
+							rectY: Math.random()*2000-2000, 
+							rectWidth: 10, 
+							rectHeight: 20
+						}
+						bullets.push(bullet);
+					}
+					var score = 0;
+
+
+					var videoInput = document.getElementById("inputVideo");
+					var canvasInput = document.getElementById("inputCanvas");
+					var canvasOverlay = document.getElementById("overlay");
+					var debugOverlay = document.getElementById("debug");
+					var overlayContext = canvasOverlay.getContext("2d");
+
+					var gameCanvas = document.getElementById("gameCanvas");
+					var gcContext = gameCanvas.getContext("2d");
+
+					//videoInput.style.top = "77px";
+					canvasOverlay.style.position = "absolute";
+					canvasOverlay.style.top = "";
+					canvasOverlay.style.zIndex = "100001";
+					canvasOverlay.style.display = "block";
+					debugOverlay.style.position = "absolute";
+					debugOverlay.style.top = "";
+					debugOverlay.style.zIndex = "100002";
+					debugOverlay.style.display = "block";
+
+					var xavierImg = document.getElementById("xavier");
+					
+
+					var htracker = new headtrackr.Tracker({ui: false, debug: debugOverlay});
+					htracker.init(videoInput, canvasInput);
+					htracker.start();
+
+					player.rectX = 0;
+
+					function collides(player, bullet) {
+						if (player.rectX < bullet.rectX + bullet.rectWidth && 
+							player.rectX + player.rectWidth > bullet.rectX &&
+							player.rectY < bullet.rectY + bullet.rectHeight) {
+							return true;
+						}
+						return false;
+					}
+					var scoreDiv = document.querySelector(".typed-element");
+
+					document.addEventListener("facetrackingEvent", function(event) {
+						overlayContext.clearRect(0, 0, 320, 240);
+						console.log(event);
+
+						// if (event.detection == "CS") {
+						// 	overlayContext.translate(event.x, event.y);
+						// 	overlayContext.rotate(event.angle-(Math.PI/2));
+						// 	overlayContext.strokeStyle = "#0000FF";
+						// 	overlayContext.strokeRect((-(event.width/2)) >> 0, (-(event.height/2)) >> 0, event.width, event.height);
+						// 	overlayContext.rotate((Math.PI/2)-event.angle);
+						// 	overlayContext.translate(-event.x, -event.y);
+						// }
+						if (event.detection == "CS") {
+							percentage = event.x/320;
+							player.rectX = percentage*760-50;
+							gcContext.clearRect(0, 0, 760, 800);
+							gcContext.fillStyle = "blue";
+							bullets.forEach(function(bullet) {
+								gcContext.fillRect(bullet.rectX, bullet.rectY, bullet.rectWidth, bullet.rectHeight);
+								bullet.rectY++;
+								if (bullet.rectY > 800) {
+									bullet.rectY = Math.random()*2000-2000;
+									score++;
+								}
+								if (collides(player, bullet)) {
+									bullet.rectY = Math.random()*2000-2000;
+									alert("You lose. :(")
+								}
+							});
+							var player1pattern = gcContext.createPattern(xavierImg, "repeat");
+							gcContext.beginPath();
+							gcContext.fillStyle = player1pattern;
+							gcContext.rect(player.rectX, player.rectY, player.rectWidth, player.rectHeight);
+							gcContext.fill();
+							gcContext.closePath();
+						}
+						if (score > 0) {
+							scoreDiv.innerHTML = "Score: "+score;
+						}
+					});
+				</script>
+			</section>
+			<footer>
+				<p>This demo uses <a href="http://www.mattboldt.com/demos/typed-js/">Typed.js.</a></p>
+			</footer>
+		</div>
+	</body>
+	<script type="text/javascript">
+	</script>
+</html>
