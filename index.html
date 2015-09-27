@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
 		<link rel="apple-touch-startup-image" href="img/startup.png">
 		<title>HackTX 2015 Demo</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
@@ -10,7 +11,7 @@
 		<script type="text/javascript" src="js/typed.js"></script>
 		<script type="text/javascript" src="js/GreatCircle.js"></script>
 		<script type="text/javascript">
-			if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPad') != -1 || navigator.userAgent.indexOf("Android") != -1) {
+			if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPad') != -1) {
 				if (navigator.standalone && navigator.geolocation) {
 					console.log("case 1");
 					run();
@@ -72,6 +73,7 @@
 			</header>
 			<section class="content">
 				<p>Made with &#127828; by Austin, Ayberk, Laura, Paul, and Wendy.</div></p>
+				<!-- <h6>If this demo is not working, consider adding the application to your homme screen.</h6> -->
 				<center><img alt="logo" src="img/logo.png" width="200px"></center>
 			</section>
 			<footer>
