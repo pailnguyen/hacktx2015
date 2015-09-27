@@ -14,6 +14,7 @@
 					typeSpeed: 100, // millseconds between characters
 					loop: false,
 					loopCount: false,
+					cursorChar: " ",
 				});
 			});
 		</script>
@@ -41,7 +42,7 @@
 					var bullets = [];
 					for (var i = 0; i < 20; i++) {
 						var bullet = {
-							rectX: Math.random()*1000-5, 
+							rectX: Math.random()*760-5, 
 							rectY: Math.random()*2000-2000, 
 							rectWidth: 10, 
 							rectHeight: 20
@@ -91,39 +92,39 @@
 
 					document.addEventListener("facetrackingEvent", function(event) {
 						overlayContext.clearRect(0, 0, 320, 240);
-						console.log(event);
+						//console.log(event);
 
-						// if (event.detection == "CS") {
-						// 	overlayContext.translate(event.x, event.y);
-						// 	overlayContext.rotate(event.angle-(Math.PI/2));
-						// 	overlayContext.strokeStyle = "#0000FF";
-						// 	overlayContext.strokeRect((-(event.width/2)) >> 0, (-(event.height/2)) >> 0, event.width, event.height);
-						// 	overlayContext.rotate((Math.PI/2)-event.angle);
-						// 	overlayContext.translate(-event.x, -event.y);
-						// }
 						if (event.detection == "CS") {
 							percentage = event.x/320;
 							player.rectX = percentage*760-50;
 							gcContext.clearRect(0, 0, 760, 800);
-							gcContext.fillStyle = "blue";
+							var player1pattern = gcContext.createPattern(xavierImg, "repeat");
+							gcContext.fillStyle = player1pattern;
+							gcContext.beginPath();
+							gcContext.drawImage(xavierImg, player.rectX, player.rectY, player.rectWidth, player.rectHeight);
+							gcContext.closePath();
+							
 							bullets.forEach(function(bullet) {
+								var r = Math.floor(Math.random()*255);
+								var g = Math.floor(Math.random()*255);
+								var b = Math.floor(Math.random()*255);
+
+								gcContext.beginPath();
+								gcContext.fillStyle = "rgb("+r+" ,"+g+" ,"+b+")";
 								gcContext.fillRect(bullet.rectX, bullet.rectY, bullet.rectWidth, bullet.rectHeight);
-								bullet.rectY++;
+								gcContext.closePath();
+								bullet.rectY += 3;
 								if (bullet.rectY > 800) {
 									bullet.rectY = Math.random()*2000-2000;
 									score++;
 								}
 								if (collides(player, bullet)) {
 									bullet.rectY = Math.random()*2000-2000;
-									alert("You lose. :(")
+									alert("Game over: new high score of "+score+"!");
+									score = 0;
+									scoreDiv.innerHTML = "Score: "+score;
 								}
 							});
-							var player1pattern = gcContext.createPattern(xavierImg, "repeat");
-							gcContext.beginPath();
-							gcContext.fillStyle = player1pattern;
-							gcContext.rect(player.rectX, player.rectY, player.rectWidth, player.rectHeight);
-							gcContext.fill();
-							gcContext.closePath();
 						}
 						if (score > 0) {
 							scoreDiv.innerHTML = "Score: "+score;
@@ -132,10 +133,8 @@
 				</script>
 			</section>
 			<footer>
-				<p>This demo uses <a href="http://www.mattboldt.com/demos/typed-js/">Typed.js.</a></p>
+				<p>This demo uses <a href="http://www.mattboldt.com/demos/typed-js/">Typed.js</a> and <a href="https://github.com/auduno/headtrackr">headtrackr.</a></p>
 			</footer>
 		</div>
 	</body>
-	<script type="text/javascript">
-	</script>
 </html>

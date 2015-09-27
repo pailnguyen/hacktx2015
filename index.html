@@ -7,64 +7,6 @@
 		<link rel="apple-touch-startup-image" href="img/startup.png">
 		<title>HackTX 2015 Demo</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
-		<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
-		<script type="text/javascript" src="js/typed.js"></script>
-		<script type="text/javascript" src="js/GreatCircle.js"></script>
-		<script type="text/javascript">
-			if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPad') != -1) {
-				if (navigator.standalone && navigator.geolocation) {
-					console.log("case 1");
-					run();
-				}
-				else {
-					console.log("case 2");
-					$(function(){
-						$(".typed-element").typed({
-							strings: ["<br>The most technologically advanced application of HackTX 2015. If you are on a smartphone/tablet, please add this web app to your home screen."],
-							typeSpeed: 30,
-							loop: false,
-							loopCount: false,
-						});
-					});
-				}
-			}
-			else if(navigator.geolocation) {
-				console.log("case 3");
-				run();
-			}
-			else {
-				console.log("case 4");
-				alert("Geolocation is not available!");
-				$(function(){
-					$(".typed-element").typed({
-						strings: ["<br>HackTX 2015^500", "<br>Your browser does not support geolocation."],
-						typeSpeed: 50,
-						loop: false,
-						loopCount: false,
-					});
-				});
-			}
-			function run() {
-				var geolocation = window.navigator.geolocation;
-				var lat1 = 0;
-				var lon1 = 0;
-				var lat2 = 11.6;
-				var lon2 = 43.1667;
-				geolocation.getCurrentPosition(function(position) {
-				    // console.log(position);
-				    lat1 = position.coords.latitude;
-				    lon1 = position.coords.longitude;
-					$(function(){
-						$(".typed-element").typed({
-							strings: ["<br>HackTX 2015^500", "<br>Your distance to Djibouti is "+ Math.round(GreatCircle.distance(lat1, lon1, lat2, lon2, "MI")) + " mi."],
-							typeSpeed: 50,
-							loop: false,
-							loopCount: false,
-						});
-					});
-				})
-			}
-		</script>
 	</head>
 	<body>
 		<div class="container">
@@ -72,12 +14,11 @@
 				<div class="title typed-element"></div>
 			</header>
 			<section class="content">
+				<p><h1><a href="d2d.html">Distance to the Country of Djibouti</a></h1></p>
+				<p><h1><a href="game.html">RotMan Under Attack (requires webcam-enabled computer)</a></h1></p>
 				<p>Made with &#127828; by Austin, Ayberk, Laura, Paul, and Wendy.</div></p>
-				<!-- <h6>If this demo is not working, consider adding the application to your homme screen.</h6> -->
-				<center><img alt="logo" src="img/logo.png" width="200px"></center>
 			</section>
 			<footer>
-				<p>This demo uses <a href="http://www.mattboldt.com/demos/typed-js/">Typed.js.</a></p>
 			</footer>
 		</div>
 	</body>

@@ -3,7 +3,7 @@
 
 body {
 	font-family: "Open Sans", sans-serif;
-	background-image: url(../img/startup.jpg);
+	/*background-image: url(../img/startup.jpg);*/
 	background-size: cover;
 	margin: 0;
 	color: black;
@@ -22,6 +22,14 @@ footer {
 
 p {
 	background: white;
+}
+a {
+	text-decoration: none;
+	color: black;
+	background: lightgoldenrodyellow;
+}
+a:hover, a:active {
+	background: lightslategray;
 }
 
 .container {
