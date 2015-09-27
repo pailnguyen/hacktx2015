@@ -5,11 +5,29 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="mobile-web-app-capable" content="yes">
 		<link rel="apple-touch-startup-image" href="img/startup.png">
-		<title>HackTX 2015 Demo</title>
+		<title>Distance2RotMan: HackTX 2015</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 		<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
 		<script type="text/javascript" src="js/typed.js"></script>
 		<script type="text/javascript" src="js/GreatCircle.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<div class="title typed-element"></div>
+			</header>
+			<section class="content">
+				<div id="map"></div>
+				<p>Made with &#127828; by Austin A., Ayberk K., Laura L., Paul N., and Wendy L.</p>
+				<p>One of the winners of the RotMan Parody App Challenge at HackTX 2015.</p>
+			</section>
+			<footer>
+				<p>This demo uses <a href="http://www.mattboldt.com/demos/typed-js/">Typed.js.</a></p>
+			</footer>
+		</div>
+		<script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
+		<link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
+
 		<script type="text/javascript">
 			if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPad') != -1) {
 				if (navigator.standalone && navigator.geolocation) {
@@ -20,7 +38,7 @@
 					console.log("case 2");
 					$(function(){
 						$(".typed-element").typed({
-							strings: ["<br>The most technologically advanced application of HackTX 2015. If you are on a smartphone/tablet, please add this web app to your home screen."],
+							strings: ["<br>The most advanced application of HackTX 2015. If you are on a smartphone/tablet, please add this web app to your home screen."],
 							typeSpeed: 30,
 							loop: false,
 							loopCount: false,
@@ -37,7 +55,7 @@
 				alert("Geolocation is not available!");
 				$(function(){
 					$(".typed-element").typed({
-						strings: ["<br>HackTX 2015^500", "<br>Your browser does not support geolocation."],
+						strings: ["<br>HackTX 2015^500", "<br>Your browser does not support geolocation. :("],
 						typeSpeed: 50,
 						loop: false,
 						loopCount: false,
@@ -45,46 +63,119 @@
 				});
 			}
 			function run() {
+				var d = new Date();
+				var hr = d.getHours();
 				var geolocation = window.navigator.geolocation;
+				// you = 1, Xavier = 2, Rohit = 3
 				var lat1 = 0;
 				var lon1 = 0;
-				var lat2 = 11.6;
-				var lon2 = 43.1667;
+				var lat2 = 30.289625322946847 + Math.random()*(30.281602189612023-30.289625322946847);
+				var lon2 = -97.74130582809448 + Math.random()*(-97.73049116134644+97.74130582809448);
+				var lat3 = 30.289625322946847 + Math.random()*(30.281602189612023-30.289625322946847);
+				var lon3 = -97.74130582809448 + Math.random()*(-97.73049116134644+97.74130582809448);
 				geolocation.getCurrentPosition(function(position) {
 				    // console.log(position);
 				    lat1 = position.coords.latitude;
 				    lon1 = position.coords.longitude;
+				    var distInMiles = GreatCircle.distance(lat1, lon1, lat2, lon2, "MI");
+				    var distInMiles2 = GreatCircle.distance(lat1, lon1, lat3, lon3, "MI"); 
 				    var units = [
-				    	" ft.",
-				    	" mi.",
-				    	" picometers."
+				    	Math.round(5280*distInMiles)+" ft.",
+				    	Math.round(distInMiles)+" mi.",
+				    	Math.round((1.609344e15)*distInMiles)+" picometers."
+				    ]
+				    var units2 = [
+				    	Math.round(5280*distInMiles2)+" ft.",
+				    	Math.round(distInMiles2)+" mi.",
+				    	Math.round((1.609344e15)*distInMiles2)+" picometers."
 				    ]
 					$(function(){
 						$(".typed-element").typed({
-							strings: ["<br>HackTX 2015^500", "<br>Your distance to RotMan is "+ Math.round(Math.random()*GreatCircle.distance(0, 0, 0, 1, "MI")) + units[Math.floor(Math.random()*3)]],
+							strings: ["<br>Your distance to Xavier is about "+ units[Math.floor(Math.random()*3)]+"^5000", "<br>Your distance to Rohit is about "+ units2[Math.floor(Math.random()*3)]+"^5000"],
 							typeSpeed: 50,
-							loop: false,
+							loop: true,
 							loopCount: false,
 						});
 					});
-				})
+					L.mapbox.accessToken = 'pk.eyJ1IjoicGF1bG5ndXllbiIsImEiOiJjaWYzMzQwajcyODJ6dG1tNXNlMHJzYWFuIn0.qGMUxjZVpSBHdD0bile-4A';
+					var map = L.mapbox.map('map', 'mapbox.streets')
+					    .setView([30.2855, -97.735], 15);
+					// You
+					L.mapbox.featureLayer({
+					    // this feature is in the GeoJSON format: see geojson.org
+					    // for the full specification
+					    type: 'Feature',
+					    geometry: {
+					        type: 'Point',
+					        // coordinates here are in longitude, latitude order because
+					        // x, y is the standard for GeoJSON and many formats
+					        coordinates: [
+					          lon1,
+					          lat1					           
+					        ]
+					    },
+					    properties: {
+							title: "Your Location",
+							description: 'You are here!',
+							// one can customize markers by adding simplestyle properties
+							// https://www.mapbox.com/guides/an-open-platform/#simplestyle
+							'marker-size': 'large',
+							'marker-color': '#DD0000',
+							'marker-symbol': 'star'
+						}
+					}).addTo(map);
+
+					// Xavier
+					L.mapbox.featureLayer({
+					    // this feature is in the GeoJSON format: see geojson.org
+					    // for the full specification
+					    type: 'Feature',
+					    geometry: {
+					        type: 'Point',
+					        // coordinates here are in longitude, latitude order because
+					        // x, y is the standard for GeoJSON and many formats
+					        coordinates: [
+					          lon2,
+					          lat2					           
+					        ]
+					    },
+					    properties: {
+							title: "Xavier's Location",
+							description: 'Go find him!',
+							// one can customize markers by adding simplestyle properties
+							// https://www.mapbox.com/guides/an-open-platform/#simplestyle
+							'marker-size': 'large',
+							'marker-color': '#0000BB',
+							'marker-symbol': 'star'
+						}
+					}).addTo(map);
+
+					// Rohit
+					L.mapbox.featureLayer({
+					    // this feature is in the GeoJSON format: see geojson.org
+					    // for the full specification
+					    type: 'Feature',
+					    geometry: {
+					        type: 'Point',
+					        // coordinates here are in longitude, latitude order because
+					        // x, y is the standard for GeoJSON and many formats
+					        coordinates: [
+					          lon3,
+					          lat3					           
+					        ]
+					    },
+					    properties: {
+							title: "Rohit's Location",
+							description: 'Go find him!',
+							// one can customize markers by adding simplestyle properties
+							// https://www.mapbox.com/guides/an-open-platform/#simplestyle
+							'marker-size': 'large',
+							'marker-color': '#00CC00',
+							'marker-symbol': 'star'
+						}
+					}).addTo(map);
+				})	
 			}
 		</script>
-	</head>
-	<body>
-		<div class="container">
-			<header>
-				<div class="title typed-element"></div>
-			</header>
-			<section class="content">
-				<p>Made with &#127828; by Austin, Ayberk, Laura, Paul, and Wendy.</p>
-				<!-- <h6>If this demo is not working, consider adding the application to your homme screen.</h6> -->
-				<!-- <center><img alt="logo" src="img/logo.png" width="200px"></center> -->
-				<p>Not sponsored by the University of Texas at Austin. Yet.</p></div>
-			</section>
-			<footer>
-				<p>This demo uses <a href="http://www.mattboldt.com/demos/typed-js/">Typed.js.</a></p>
-			</footer>
-		</div>
 	</body>
 </html>

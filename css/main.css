@@ -1,10 +1,18 @@
 @charset "utf-16";
 @import url(http://fonts.googleapis.com/css?family=Lato:700|Open+Sans);
 
+html {
+	height: 100%;
+	background-attachment: fixed;
+	background-image: url(../img/xr.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow-y: scroll;
+}
+
 body {
 	font-family: "Open Sans", sans-serif;
-	background-image: url(../img/xr.png);
-	background-size: cover;
 	margin: 0;
 	color: black;
 }
@@ -18,10 +26,13 @@ footer {
 	margin: 0 auto;
 	text-align: center;
 	width: 200px;
+	font-size: 0.5em;
 }
 
 p {
+	text-align: center;
 	background: white;
+	font-size: 0.75em;
 }
 a {
 	text-decoration: none;
@@ -31,7 +42,9 @@ a {
 a:hover, a:active {
 	background: lightslategray;
 }
-
+#map {
+	height: 400px;
+}
 .container {
 	margin: 0 auto;
 	max-width: 760px;
@@ -79,7 +92,7 @@ a:hover, a:active {
 }
 
 .title, .typed-element {
-	display: inline;
+	min-height: 300px;
 }
 
 .typed-cursor {

@@ -51,7 +51,6 @@
 					}
 					var score = 0;
 
-
 					var videoInput = document.getElementById("inputVideo");
 					var canvasInput = document.getElementById("inputCanvas");
 					var canvasOverlay = document.getElementById("overlay");
@@ -113,7 +112,7 @@
 								gcContext.fillStyle = "rgb("+r+" ,"+g+" ,"+b+")";
 								gcContext.fillRect(bullet.rectX, bullet.rectY, bullet.rectWidth, bullet.rectHeight);
 								gcContext.closePath();
-								bullet.rectY += 3;
+								bullet.rectY += Math.ceil(0.3*score+3);
 								if (bullet.rectY > 800) {
 									bullet.rectY = Math.random()*2000-2000;
 									score++;
