@@ -10,7 +10,7 @@
 		<script type="text/javascript" src="js/typed.js"></script>
 		<script type="text/javascript" src="js/GreatCircle.js"></script>
 		<script type="text/javascript">
-			if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPad') != -1) {
+			if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPad') != -1 || navigator.userAgent.indexOf("Android") != -1) {
 				if (navigator.standalone && navigator.geolocation) {
 					console.log("case 1");
 					run();
@@ -19,8 +19,8 @@
 					console.log("case 2");
 					$(function(){
 						$(".typed-element").typed({
-							strings: ["<br>The most technologically advanced application of HackTX 2015. If you are on an iOS device, please add this web app to your home screen."],
-							typeSpeed: 50,
+							strings: ["<br>The most technologically advanced application of HackTX 2015. If you are on a smartphone/tablet, please add this web app to your home screen."],
+							typeSpeed: 30,
 							loop: false,
 							loopCount: false,
 						});
