@@ -26,7 +26,7 @@ h1, h2, h3 {
 footer {
 	margin: 0 auto;
 	text-align: center;
-	max-width: 250px;
+	max-width: 350px;
 	font-size: 0.75em;
 }
 
@@ -90,6 +90,7 @@ a:hover, a:active {
 	margin: 0 auto;
 	width: 100%;
 	background: white;
+	min-height: 300px;
 }
 
 .title, .typed-element {
@@ -124,7 +125,10 @@ a:hover, a:active {
 	body {
 		font-size: 0.6rem;
 	}
+	footer {
+		max-width: 250px;
+	}
 	.title, .typed-element {
-		min-height: 150px;
+		min-height: 200px;
 	}
 }
