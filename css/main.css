@@ -87,7 +87,7 @@ a:hover, a:active {
 	font-weight: bold;
 	text-align: center;
 	margin: 0 auto;
-	width: 10em;
+	width: 100%;
 	background: white;
 }
 
@@ -100,6 +100,7 @@ a:hover, a:active {
 	-webkit-animation: blink 1s infinite;
 	-moz-animation: blink 1s infinite;
 	animation: blink 1s infinite;
+	font-size: 2em;
 }
 @keyframes blink {
 	0% { opacity:1; }
@@ -115,4 +116,13 @@ a:hover, a:active {
 	0% { opacity:1; }
 	50% { opacity:0; }
 	100% { opacity:1; }
+}
+
+@media only screen and (max-width: 667px) {
+	.title, .typed-element, .typed-cursor {
+		font-size: 1em;
+	}
+	.title, .typed-element {
+		min-height: 150px;
+	}
 }
