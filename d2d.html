@@ -82,12 +82,12 @@
 				    var distInMiles2 = GreatCircle.distance(lat1, lon1, lat3, lon3, "MI"); 
 				    var units = [
 				    	Math.round(5280*distInMiles)+" ft.",
-				    	Math.round(distInMiles)+" mi.",
+				    	distInMiles.toFixed(1)+" mi.",
 				    	Math.round((1.609344e15)*distInMiles)+" picometers."
 				    ]
 				    var units2 = [
 				    	Math.round(5280*distInMiles2)+" ft.",
-				    	Math.round(distInMiles2)+" mi.",
+				    	distInMiles2.toFixed(1)+" mi.",
 				    	Math.round((1.609344e15)*distInMiles2)+" picometers."
 				    ]
 					$(function(){
@@ -100,7 +100,7 @@
 					});
 					L.mapbox.accessToken = 'pk.eyJ1IjoicGF1bG5ndXllbiIsImEiOiJjaWYzMzQwajcyODJ6dG1tNXNlMHJzYWFuIn0.qGMUxjZVpSBHdD0bile-4A';
 					var map = L.mapbox.map('map', 'mapbox.streets')
-					    .setView([30.2855, -97.735], 15);
+					    .setView([30.2865, -97.735], 15);
 					// You
 					L.mapbox.featureLayer({
 					    // this feature is in the GeoJSON format: see geojson.org
@@ -116,7 +116,7 @@
 					        ]
 					    },
 					    properties: {
-							title: "Your Location",
+							title: "Current Location",
 							description: 'You are here!',
 							// one can customize markers by adding simplestyle properties
 							// https://www.mapbox.com/guides/an-open-platform/#simplestyle
@@ -142,7 +142,7 @@
 					    },
 					    properties: {
 							title: "Xavier's Location",
-							description: 'Go find him!',
+							description: "Wandering around campus. Go find him!",
 							// one can customize markers by adding simplestyle properties
 							// https://www.mapbox.com/guides/an-open-platform/#simplestyle
 							'marker-size': 'large',
@@ -167,7 +167,7 @@
 					    },
 					    properties: {
 							title: "Rohit's Location",
-							description: 'Go find him!',
+							description: "Enjoying a nice day at UT.",
 							// one can customize markers by adding simplestyle properties
 							// https://www.mapbox.com/guides/an-open-platform/#simplestyle
 							'marker-size': 'large',
