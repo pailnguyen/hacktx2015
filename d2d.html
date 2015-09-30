@@ -8,6 +8,10 @@
 		<link rel="apple-touch-icon" sizes="57x57" href="img/app_icon.png">
 		<link rel="apple-touch-icon" sizes="72x72" href="img/app_icon.png">
 		<link rel="apple-touch-icon" sizes="114x114" href="img/app_icon.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="img/app_icon.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="img/app_icon.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="img/app_icon.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="img/app_icon.png">
 		<link rel="apple-touch-icon-precomposed" href="img/app_icon.png">
 		<title>Distance to RotMan</title>
 		<link rel="stylesheet" type="text/css" href="css/normalize.css">
@@ -45,6 +49,8 @@
 						console.log("case 2");
 						var div = document.getElementById("distance");
 						div.innerHTML = "<p>The most advanced application of HackTX 2015. If you are on a smartphone/tablet, please add this web app to your home screen to begin.</p>";
+						var mapDiv = document.getElementById("map");
+						mapDiv.innerHTML = "";
 					}
 				}
 				else if(navigator.geolocation) {
