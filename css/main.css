@@ -74,6 +74,7 @@ a:hover, a:active {
 @media only screen and (max-device-width: 667px) {
 	html {
 		font-size: 0.8rem;
+		-webkit-background-attachment: scroll;
 		background-attachment: scroll;
 	}
 }
