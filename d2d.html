@@ -4,179 +4,133 @@
 		<meta charset="utf-8">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="mobile-web-app-capable" content="yes">
-		<link rel="apple-touch-startup-image" href="img/startup.png">
-		<title>Distance2RotMan</title>
+		<title>Distance to RotMan</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
-		<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
-		<script type="text/javascript" src="js/typed.js"></script>
 		<script type="text/javascript" src="js/GreatCircle.js"></script>
+		<script src="https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js"></script>
+		<link rel="stylesheet" href="https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css">
 	</head>
 	<body>
 		<div class="container">
 			<header>
-				<div class="title typed-element"></div>
+				<div class="title">Distance to RotMan</div>
+				<div id="distance">
+					<div id="info1" class="distanceInfo"></div>
+					<div id="info2" class="distanceInfo"></div>
+				</div>
 			</header>
 			<section class="content">
 				<div id="map"></div>
-				<p>Tap on the map pins to get more information about RotMan's whereabouts.</p>
-				<p>Made with &#127828; by Austin A., Ayberk K., Laura L., Paul N., and Wendy L. for HackTX 2015.</p>
-				<!-- <p>One of the winners of the RotMan Parody App Challenge at HackTX 2015.</p> -->
+				<p>Tap on the map pins to get more information about Xavier and Rohit's whereabouts.</p>
+				<h1>How does it work?</h1>
+				<p>We calculate your distance to RotMan by gathering the GPS data on their phones via our satellite-sonar-geotracking algorithms. So now you can know where Xavier and Rohit are all the time!</p>
 			</section>
 			<footer>
-				<p>This web app uses <a href="http://www.mattboldt.com/demos/typed-js/">Typed.js</a> and <a href="https://www.mapbox.com/">Mapbox.</a></p>
+				<p>Made with &#127828; by Austin A., Ayberk K., Laura L., Paul N., and Wendy L. for HackTX 2015. This web app uses <a href="https://www.mapbox.com/">Mapbox</a>.</p>
 			</footer>
 		</div>
-		<script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
-		<link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
+		
 
 		<script type="text/javascript">
-			if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPad') != -1) {
-				if (navigator.standalone && navigator.geolocation) {
-					console.log("case 1");
+				if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPad') != -1) {
+					if (navigator.standalone && navigator.geolocation) {
+						console.log("case 1");
+						run();
+					}
+					else {
+						console.log("case 2");
+						var div = document.getElementById("distance");
+						div.innerHTML = "The most advanced application of HackTX 2015. If you are on a smartphone/tablet, please add this web app to your home screen to begin.";
+					}
+				}
+				else if(navigator.geolocation) {
+					console.log("case 3");
 					run();
 				}
 				else {
-					console.log("case 2");
-					$(function(){
-						$(".typed-element").typed({
-							strings: ["<br>The most advanced application of HackTX 2015. If you are on a smartphone/tablet, please add this web app to your home screen to begin."],
-							typeSpeed: 30,
-							loop: false,
-							loopCount: false,
-						});
-					});
+					console.log("case 4");
+					alert("Geolocation is not available!");
+					var div = document.getElementById("distance");
+					div.innerHTML = "Your browser does not support geolocation.";
 				}
-			}
-			else if(navigator.geolocation) {
-				console.log("case 3");
-				run();
-			}
-			else {
-				console.log("case 4");
-				alert("Geolocation is not available!");
-				$(function(){
-					$(".typed-element").typed({
-						strings: ["<br>HackTX 2015^500", "<br>Your browser does not support geolocation. :("],
-						typeSpeed: 50,
-						loop: false,
-						loopCount: false,
-					});
-				});
-			}
-			function run() {
-				var d = new Date();
-				var hr = d.getHours();
-				var geolocation = window.navigator.geolocation;
-				// you = 1, Xavier = 2, Rohit = 3
-				var lat1 = 0;
-				var lon1 = 0;
-				var lat2 = 30.289625322946847 + Math.random()*(30.281602189612023-30.289625322946847);
-				var lon2 = -97.74130582809448 + Math.random()*(-97.73049116134644+97.74130582809448);
-				var lat3 = 30.289625322946847 + Math.random()*(30.281602189612023-30.289625322946847);
-				var lon3 = -97.74130582809448 + Math.random()*(-97.73049116134644+97.74130582809448);
-				geolocation.getCurrentPosition(function(position) {
-				    // console.log(position);
-				    lat1 = position.coords.latitude;
-				    lon1 = position.coords.longitude;
-				    var distInMiles = GreatCircle.distance(lat1, lon1, lat2, lon2, "MI");
-				    var distInMiles2 = GreatCircle.distance(lat1, lon1, lat3, lon3, "MI"); 
-				    var units = [
-				    	Math.round(5280*distInMiles)+" ft.",
-				    	distInMiles.toFixed(1)+" mi.",
-				    	Math.round((1.609344e15)*distInMiles)+" picometers."
-				    ]
-				    var units2 = [
-				    	Math.round(5280*distInMiles2)+" ft.",
-				    	distInMiles2.toFixed(1)+" mi.",
-				    	Math.round((1.609344e15)*distInMiles2)+" picometers."
-				    ]
-					$(function(){
-						$(".typed-element").typed({
-							strings: ["<br>Your distance to Xavier is about "+ units[Math.floor(Math.random()*3)]+"^5000", "<br>Your distance to Rohit is about "+ units2[Math.floor(Math.random()*3)]+"^5000"],
-							typeSpeed: 50,
-							loop: true,
-							loopCount: false,
-						});
-					});
-					L.mapbox.accessToken = 'pk.eyJ1IjoicGF1bG5ndXllbiIsImEiOiJjaWYzMzQwajcyODJ6dG1tNXNlMHJzYWFuIn0.qGMUxjZVpSBHdD0bile-4A';
-					var map = L.mapbox.map('map', 'mapbox.streets')
-					    .setView([30.2865, -97.735], 15);
-					// You
-					L.mapbox.featureLayer({
-					    // this feature is in the GeoJSON format: see geojson.org
-					    // for the full specification
-					    type: 'Feature',
-					    geometry: {
-					        type: 'Point',
-					        // coordinates here are in longitude, latitude order because
-					        // x, y is the standard for GeoJSON and many formats
-					        coordinates: [
-					          lon1,
-					          lat1					           
-					        ]
-					    },
-					    properties: {
-							title: "Current Location",
-							description: 'You are here!',
-							// one can customize markers by adding simplestyle properties
-							// https://www.mapbox.com/guides/an-open-platform/#simplestyle
-							'marker-size': 'large',
-							'marker-color': '#DD0000',
-							'marker-symbol': 'star'
-						}
-					}).addTo(map);
-
-					// Xavier
-					L.mapbox.featureLayer({
-					    // this feature is in the GeoJSON format: see geojson.org
-					    // for the full specification
-					    type: 'Feature',
-					    geometry: {
-					        type: 'Point',
-					        // coordinates here are in longitude, latitude order because
-					        // x, y is the standard for GeoJSON and many formats
-					        coordinates: [
-					          lon2,
-					          lat2					           
-					        ]
-					    },
-					    properties: {
-							title: "Xavier's Location",
-							description: "Wandering around campus. Go find him!",
-							// one can customize markers by adding simplestyle properties
-							// https://www.mapbox.com/guides/an-open-platform/#simplestyle
-							'marker-size': 'large',
-							'marker-color': '#0000BB',
-							'marker-symbol': 'star'
-						}
-					}).addTo(map);
-
-					// Rohit
-					L.mapbox.featureLayer({
-					    // this feature is in the GeoJSON format: see geojson.org
-					    // for the full specification
-					    type: 'Feature',
-					    geometry: {
-					        type: 'Point',
-					        // coordinates here are in longitude, latitude order because
-					        // x, y is the standard for GeoJSON and many formats
-					        coordinates: [
-					          lon3,
-					          lat3					           
-					        ]
-					    },
-					    properties: {
-							title: "Rohit's Location",
-							description: "Enjoying a nice day at UT.",
-							// one can customize markers by adding simplestyle properties
-							// https://www.mapbox.com/guides/an-open-platform/#simplestyle
-							'marker-size': 'large',
-							'marker-color': '#00CC00',
-							'marker-symbol': 'star'
-						}
-					}).addTo(map);
-				})	
-			}
+				function run() {
+					var geolocation = window.navigator.geolocation;
+					// you = 1, Xavier = 2, Rohit = 3
+					var lat1 = 0;
+					var lon1 = 0;
+					var lat2 = 30.289625322946847 + Math.random()*(30.281602189612023-30.289625322946847);
+					var lon2 = -97.74130582809448 + Math.random()*(-97.73049116134644+97.74130582809448);
+					var lat3 = 30.289625322946847 + Math.random()*(30.281602189612023-30.289625322946847);
+					var lon3 = -97.74130582809448 + Math.random()*(-97.73049116134644+97.74130582809448);
+					geolocation.getCurrentPosition(function(position) {
+						// console.log(position);
+						lat1 = position.coords.latitude;
+						lon1 = position.coords.longitude;
+						var distInMiles = GreatCircle.distance(lat1, lon1, lat2, lon2, "MI").toFixed(1)+" mi.";
+						var distInMiles2 = GreatCircle.distance(lat1, lon1, lat3, lon3, "MI").toFixed(1)+" mi.";
+						var distanceInfo1 = document.getElementById("info1");
+						var distanceInfo2 = document.getElementById("info2");
+						distanceInfo1.innerHTML = "<p>Your distance to <span class='name'>Xavier</span> is about " + distInMiles+"</p>";
+						distanceInfo2.innerHTML = "<p>Your distance to <span class='name'>Rohit</span> is about " + distInMiles2+"</p>";
+						L.mapbox.accessToken = 'pk.eyJ1IjoicGF1bG5ndXllbiIsImEiOiJjaWYzMzQwajcyODJ6dG1tNXNlMHJzYWFuIn0.qGMUxjZVpSBHdD0bile-4A';
+						var map = L.mapbox.map('map', 'mapbox.streets')
+							.setView([30.2865, -97.735], 15);
+						// You
+						L.mapbox.featureLayer({
+							type: 'Feature',
+							geometry: {
+								type: 'Point',
+								coordinates: [
+								  lon1,
+								  lat1					           
+								]
+							},
+							properties: {
+								title: "Current Location",
+								description: 'You are here!',
+								'marker-size': 'large',
+								'marker-color': '#DD0000',
+								'marker-symbol': 'star'
+							}
+						}).addTo(map);
+						// Xavier
+						L.mapbox.featureLayer({
+							type: 'Feature',
+							geometry: {
+								type: 'Point',
+								coordinates: [
+								  lon2,
+								  lat2
+								]
+							},
+							properties: {
+								title: "Xavier's Location",
+								description: "Wandering around campus. Go find him!",
+								'marker-size': 'large',
+								'marker-color': '#0000BB',
+								'marker-symbol': 'star'
+							}
+						}).addTo(map);
+						// Rohit
+						L.mapbox.featureLayer({
+							type: 'Feature',
+							geometry: {
+								type: 'Point',
+								coordinates: [
+								  lon3,
+								  lat3
+								]
+							},
+							properties: {
+								title: "Rohit's Location",
+								description: "Enjoying a nice day at UT.",
+								'marker-size': 'large',
+								'marker-color': '#00CC00',
+								'marker-symbol': 'star'
+							}
+						}).addTo(map);
+					})	
+				}
 		</script>
 	</body>
 	<script>
@@ -184,9 +138,7 @@
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
 		ga('create', 'UA-68160646-1', 'auto');
 		ga('send', 'pageview');
-
 	</script>
 </html>

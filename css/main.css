@@ -1,4 +1,4 @@
-@charset "utf-16";
+@charset "utf-8";
 @import url(http://fonts.googleapis.com/css?family=Lato:700|Open+Sans);
 
 html {
@@ -9,31 +9,35 @@ html {
 	background-repeat: no-repeat;
 	background-size: cover;
 	overflow-y: scroll;
+	font-size: 16px;
 }
 
 body {
 	font-family: "Open Sans", sans-serif;
 	margin: 0;
 	color: black;
-	font-size: 1rem;
+	font-size: 1.5rem;
 }
 
 h1, h2, h3 {
 	font-family: "Lato", sans-serif;
 	font-weight: 700;
+	background: rgba(255,255,255,0.7);
+	margin: 0;
+	text-align: center;
 }
 
 footer {
 	margin: 0 auto;
+	margin-top: 1em;
 	text-align: center;
-	max-width: 350px;
-	font-size: 0.75em;
+	font-size: 0.5em;
 }
 
 p {
 	text-align: center;
 	background: rgba(255,255,255,0.7);
-	font-size: 0.75em;
+	margin: 0;
 }
 a {
 	text-decoration: none;
@@ -49,86 +53,26 @@ a:hover, a:active {
 .container {
 	margin: 0 auto;
 	max-width: 760px;
-	font-size: 2em;
 }
 .content {
 	margin: 0;
 }
-
-.card {
-	height: 200px;
-	width: 100%;
-	border: 1px solid black;
-	background-color: blue;
-	transform: translate(0px, 0px);
+.name {
+	font-weight: bold;
 }
-.dropzone {
-	width: 32%;
-	border: dashed 1px black;
-	display: inline-block;
-	height: 200px;
-	margin: 1px;
-	transition: background-color 0.2s;
-}
-.drop-target {
-	background-color: #29e;
-	border-color: #fff;
-	border-style: solid;
-}
-.holding-area {
-	width: 32%;
-	border: dashed 1px black;
-	display: inline-block;
-	height: 200px;
-}
-
 .title {
 	font-family: "Lato", sans-serif;
 	font-size: 2em;
 	font-weight: bold;
 	text-align: center;
-	margin: 0 auto;
-	width: 100%;
 	background: rgba(255,255,255,0.7);
-	min-height: 300px;
-}
-
-.title, .typed-element {
-	min-height: 300px;
-}
-
-.typed-cursor {
-	/*opacity: 1;
-	-webkit-animation: blink 1s infinite;
-	-moz-animation: blink 1s infinite;
-	animation: blink 1s infinite;
-	font-size: 2em;*/
-	display: none;
-}
-@keyframes blink {
-	0% { opacity:1; }
-	50% { opacity:0; }
-	100% { opacity:1; }
-}
-@-webkit-keyframes blink {
-	0% { opacity:1; }
-	50% { opacity:0; }
-	100% { opacity:1; }
-}
-@-moz-keyframes blink {
-	0% { opacity:1; }
-	50% { opacity:0; }
-	100% { opacity:1; }
 }
 
 @media only screen and (max-width: 667px) {
+	html {
+		-webkit-text-size-adjust: none;
+	}
 	body {
-		font-size: 0.6rem;
-	}
-	footer {
-		max-width: 250px;
-	}
-	.title, .typed-element {
-		min-height: 200px;
+		font-size: 1rem;
 	}
 }
