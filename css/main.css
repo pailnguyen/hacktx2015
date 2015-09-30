@@ -71,8 +71,11 @@ a:hover, a:active {
 	background: rgba(255,255,255,0.7);
 }
 
-@media only screen and (max-device-width: 667px) {
+@media only screen and (max-device-width: 640px), 
+	only screen and (max-device-width: 667px), 
+	only screen and (max-width: 480px) {
 	html {
 		font-size: 0.8rem;
+		background-attachment: scroll;
 	}
 }
