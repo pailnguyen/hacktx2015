@@ -11,7 +11,6 @@ html {
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
-	background-color: lightgray;
 	font-size: 16px;
 }
 
@@ -75,7 +74,9 @@ a:hover, a:active {
 @media only screen and (max-device-width: 667px) {
 	html {
 		font-size: 0.7rem;
-		-webkit-background-attachment: scroll;
-		background-attachment: scroll;
+		background-image: "";
+		background-color: gray;
+		/*-webkit-background-attachment: scroll;
+		background-attachment: scroll;*/
 	}
 }
