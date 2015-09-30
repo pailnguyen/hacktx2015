@@ -49,7 +49,7 @@ a:hover, a:active {
 	background: lightslategray;
 }
 #map {
-	height: 400px;
+	height: 360px;
 }
 .container {
 	margin: 0 auto;
@@ -71,7 +71,6 @@ a:hover, a:active {
 
 @media only screen and (max-device-width: 667px) {
 	html {
-		-webkit-text-size-adjust: none;
 		font-size: 0.8rem;
 	}
 }
