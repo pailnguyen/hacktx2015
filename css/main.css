@@ -68,11 +68,9 @@ a:hover, a:active {
 	background: rgba(255,255,255,0.7);
 }
 
-@media only screen and (max-width: 667px) {
+@media only screen and (max-device-width: 667px) {
 	html {
 		-webkit-text-size-adjust: none;
-	}
-	body {
-		font-size: 1rem;
+		font-size: 0.8rem;
 	}
 }

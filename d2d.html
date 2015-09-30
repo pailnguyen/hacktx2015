@@ -40,7 +40,7 @@
 					else {
 						console.log("case 2");
 						var div = document.getElementById("distance");
-						div.innerHTML = "The most advanced application of HackTX 2015. If you are on a smartphone/tablet, please add this web app to your home screen to begin.";
+						div.innerHTML = "<p>The most advanced application of HackTX 2015. If you are on a smartphone/tablet, please add this web app to your home screen to begin.</p>";
 					}
 				}
 				else if(navigator.geolocation) {
@@ -51,7 +51,7 @@
 					console.log("case 4");
 					alert("Geolocation is not available!");
 					var div = document.getElementById("distance");
-					div.innerHTML = "Your browser does not support geolocation.";
+					div.innerHTML = "<p>Your browser does not support geolocation.</p>";
 				}
 				function run() {
 					var geolocation = window.navigator.geolocation;
