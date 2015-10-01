@@ -31,7 +31,7 @@
 			</header>
 			<section class="content">
 				<div id="map"></div>
-				<p>Tap on the map pins to get more information about Xavier and Rohit's whereabouts.</p>
+				<p>Tap on the map pins to get more information about Xavier and Rohit's whereabouts. Pinch to zoom. If the map does not show up, ensure that location services are enabled on your device.</p>
 				<h1>How does it work?</h1>
 				<p>We calculate your distance to RotMan by gathering the GPS data on their phones via our satellite-sonar-geotracking algorithms. So now you can know where Xavier and Rohit are all the time!</p>
 			</section>
@@ -69,12 +69,13 @@
 					"Congratulations, you can find yourself on a map.",
 					"Unfortunately, not everyone can be Xavier.",
 					"This isn't the Rohit you're looking for.",
-					"What starts here?"
+					"What starts here?",
+					"Probably should go buy groceries right now..."
 				];
 				xavierStrings = [
 					"seems to be lost...",
 					"is looking for Rohit.",
-					"The one and only.",
+					"is funding a tech startup.",
 					"is looking for a nice spot to build a Chili's.",
 					"Not shown: his Secret Service.",
 					"is on his way to his bimonthly Illuminati meetings.",
@@ -87,7 +88,7 @@
 					"is looking for Xavier.",
 					"is waiting for his Uber&trade;.",
 					"has the strange feeling he's being tracked.",
-					"He's probably being more productive than you are right now.",
+					"is running a marathon.",
 					"is meeting with Barack Obama!",
 					"\"Hey Siri, where is the closest Arby's?\"",
 					"is secretly the Green Power Ranger.",
@@ -105,8 +106,8 @@
 					// console.log(position);
 					lat1 = position.coords.latitude;
 					lon1 = position.coords.longitude;
-					var distInMiles = GreatCircle.distance(lat1, lon1, lat2, lon2, "MI").toFixed(1)+" mi.";
-					var distInMiles2 = GreatCircle.distance(lat1, lon1, lat3, lon3, "MI").toFixed(1)+" mi.";
+					var distInMiles = GreatCircle.distance(lat1, lon1, lat2, lon2, "MI").toFixed(2)+" mi.";
+					var distInMiles2 = GreatCircle.distance(lat1, lon1, lat3, lon3, "MI").toFixed(2)+" mi.";
 					var distanceInfo1 = document.getElementById("info1");
 					var distanceInfo2 = document.getElementById("info2");
 					distanceInfo1.innerHTML = "<p>Your distance to <span class='name'>Xavier</span> is about " + distInMiles+"</p>";
