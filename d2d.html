@@ -36,111 +36,140 @@
 				<p>We calculate your distance to RotMan by gathering the GPS data on their phones via our satellite-sonar-geotracking algorithms. So now you can know where Xavier and Rohit are all the time!</p>
 			</section>
 			<footer>
-				<p>Made with &#127828; by Austin A., Ayberk K., Laura L., Paul N., and Wendy L. for HackTX 2015. This web app uses <a href="https://www.mapbox.com/">Mapbox</a>.</p>
+				<p>Made with &#127828; by Austin A., Ayberk K., Laura L., Paul N., and Wendy L. for HackTX 2015. This web app uses the <a href="https://www.mapbox.com/">Mapbox mapping platform</a>.</p>
 			</footer>
 		</div>
 		<script type="text/javascript">
-				if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPad') != -1) {
-					if (navigator.standalone && navigator.geolocation) {
-						console.log("case 1");
-						run();
-					}
-					else {
-						console.log("case 2");
-						run();
-						var div = document.getElementById("distance");
-						div.innerHTML = "<p>The most advanced application of HackTX 2015. If you are on a smartphone/tablet, please add this web app to your home screen to begin. Make sure to have location services enabled.</p>";
-						run();
-					}
-				}
-				else if(navigator.geolocation) {
-					console.log("case 3");
+			if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPad') != -1) {
+				if (navigator.standalone && navigator.geolocation) {
+					console.log("case 1");
 					run();
 				}
 				else {
-					console.log("case 4");
-					alert("Geolocation is not available!");
+					console.log("case 2");
+					run();
 					var div = document.getElementById("distance");
-					div.innerHTML = "<p>Your browser does not support geolocation.</p>";
+					div.innerHTML = "<p>The most advanced application of HackTX 2015. If you are on a smartphone/tablet, please add this web app to your home screen to begin. Make sure to have location services enabled.</p>";
+					run();
 				}
-				function run() {
-					var geolocation = window.navigator.geolocation;
-					// you = 1, Xavier = 2, Rohit = 3
-					var lat1 = 0;
-					var lon1 = 0;
-					var lat2 = 30.289625322946847 + Math.random()*(30.281602189612023-30.289625322946847);
-					var lon2 = -97.74130582809448 + Math.random()*(-97.73049116134644+97.74130582809448);
-					var lat3 = 30.289625322946847 + Math.random()*(30.281602189612023-30.289625322946847);
-					var lon3 = -97.74130582809448 + Math.random()*(-97.73049116134644+97.74130582809448);
-					geolocation.getCurrentPosition(function(position) {
-						// console.log(position);
-						lat1 = position.coords.latitude;
-						lon1 = position.coords.longitude;
-						var distInMiles = GreatCircle.distance(lat1, lon1, lat2, lon2, "MI").toFixed(1)+" mi.";
-						var distInMiles2 = GreatCircle.distance(lat1, lon1, lat3, lon3, "MI").toFixed(1)+" mi.";
-						var distanceInfo1 = document.getElementById("info1");
-						var distanceInfo2 = document.getElementById("info2");
-						distanceInfo1.innerHTML = "<p>Your distance to <span class='name'>Xavier</span> is about " + distInMiles+"</p>";
-						distanceInfo2.innerHTML = "<p>Your distance to <span class='name'>Rohit</span> is about " + distInMiles2+"</p>";
-						L.mapbox.accessToken = 'pk.eyJ1IjoicGF1bG5ndXllbiIsImEiOiJjaWYzMzQwajcyODJ6dG1tNXNlMHJzYWFuIn0.qGMUxjZVpSBHdD0bile-4A';
-						var map = L.mapbox.map('map', 'mapbox.streets')
-							.setView([30.2865, -97.735], 15);
-						// You
-						L.mapbox.featureLayer({
-							type: 'Feature',
-							geometry: {
-								type: 'Point',
-								coordinates: [
-								  lon1,
-								  lat1					           
-								]
-							},
-							properties: {
-								title: "Current Location",
-								description: 'You are here!',
-								'marker-size': 'large',
-								'marker-color': '#DD0000',
-								'marker-symbol': 'star'
-							}
-						}).addTo(map);
-						// Xavier
-						L.mapbox.featureLayer({
-							type: 'Feature',
-							geometry: {
-								type: 'Point',
-								coordinates: [
-								  lon2,
-								  lat2
-								]
-							},
-							properties: {
-								title: "Xavier's Location",
-								description: "Wandering around campus. Go find him!",
-								'marker-size': 'large',
-								'marker-color': '#0000BB',
-								'marker-symbol': 'cross'
-							}
-						}).addTo(map);
-						// Rohit
-						L.mapbox.featureLayer({
-							type: 'Feature',
-							geometry: {
-								type: 'Point',
-								coordinates: [
-								  lon3,
-								  lat3
-								]
-							},
-							properties: {
-								title: "Rohit's Location",
-								description: "Enjoying a nice day at UT.",
-								'marker-size': 'large',
-								'marker-color': '#00CC00',
-								'marker-symbol': 'pitch'
-							}
-						}).addTo(map);
-					})	
-				}
+			}
+			else if(navigator.geolocation) {
+				console.log("case 3");
+				run();
+			}
+			else {
+				console.log("case 4");
+				alert("Geolocation is not available!");
+				var div = document.getElementById("distance");
+				div.innerHTML = "<p>Your browser does not support geolocation.</p>";
+			}
+			function run() {
+				userStrings = [
+					"You are here! Just in case you got lost.",
+					"Congratulations, you can find yourself on a map.",
+					"Unfortunately, not everyone can be Xavier.",
+					"This isn't the Rohit you're looking for.",
+					"What starts here?"
+				];
+				xavierStrings = [
+					"seems to be lost...",
+					"is looking for Rohit.",
+					"He can't be tied down.",
+					"is looking for a nice spot to build a Chili's.",
+					"Not shown: his Secret Service.",
+					"is on his way to the biweekly Illuminati meetings.",
+					"is busy officiating a baptism.",
+					"Keeping Austin weird.",
+					"takes himself VERY seriously."
+				];
+				rohitStrings = [
+					"is enjoying a nice day in Austin.",
+					"is looking for Xavier.",
+					"is waiting for his Uber&trade;.",
+					"has the strange feeling he's being tracked.",
+					"He's probably being more productive than you are right now.",
+					"is meeting with Barack Obama!",
+					"\"Hey Siri, where is the closest Arby's?\"",
+					"is secretly the Green Power Ranger.",
+					"can't find where he parked his car."
+				];
+				var geolocation = window.navigator.geolocation;
+				// user = 1, Xavier = 2, Rohit = 3
+				var lat1 = 0;
+				var lon1 = 0;
+				var lat2 = 30.389461136661513 + Math.random()*(30.185496022109444-30.389461136661513);
+				var lon2 = -97.84629821777344 + Math.random()*(-97.61489868164062+97.84629821777344);
+				var lat3 = 30.389461136661513 + Math.random()*(30.185496022109444-30.389461136661513);
+				var lon3 = -97.84629821777344 + Math.random()*(-97.61489868164062+97.84629821777344);
+				geolocation.getCurrentPosition(function(position) {
+					// console.log(position);
+					lat1 = position.coords.latitude;
+					lon1 = position.coords.longitude;
+					var distInMiles = GreatCircle.distance(lat1, lon1, lat2, lon2, "MI").toFixed(1)+" mi.";
+					var distInMiles2 = GreatCircle.distance(lat1, lon1, lat3, lon3, "MI").toFixed(1)+" mi.";
+					var distanceInfo1 = document.getElementById("info1");
+					var distanceInfo2 = document.getElementById("info2");
+					distanceInfo1.innerHTML = "<p>Your distance to <span class='name'>Xavier</span> is about " + distInMiles+"</p>";
+					distanceInfo2.innerHTML = "<p>Your distance to <span class='name'>Rohit</span> is about " + distInMiles2+"</p>";
+					L.mapbox.accessToken = 'pk.eyJ1IjoicGF1bG5ndXllbiIsImEiOiJjaWYzMzQwajcyODJ6dG1tNXNlMHJzYWFuIn0.qGMUxjZVpSBHdD0bile-4A';
+					var map = L.mapbox.map('map', 'mapbox.streets')
+						.setView([30.2865, -97.735], 11);
+					// User
+					L.mapbox.featureLayer({
+						type: 'Feature',
+						geometry: {
+							type: 'Point',
+							coordinates: [
+							  lon1,
+							  lat1					           
+							]
+						},
+						properties: {
+							title: "Your Location!",
+							description: userStrings[Math.floor(Math.random()*userStrings.length)],
+							'marker-size': 'large',
+							'marker-color': '#DD0000',
+							'marker-symbol': 'star'
+						}
+					}).addTo(map);
+					// Xavier
+					L.mapbox.featureLayer({
+						type: 'Feature',
+						geometry: {
+							type: 'Point',
+							coordinates: [
+							  lon2,
+							  lat2
+							]
+						},
+						properties: {
+							title: "Xavier Rotnofsky",
+							description: xavierStrings[Math.floor(Math.random()*xavierStrings.length)],
+							'marker-size': 'large',
+							'marker-color': '#0000BB',
+							'marker-symbol': 'cross'
+						}
+					}).addTo(map);
+					// Rohit
+					L.mapbox.featureLayer({
+						type: 'Feature',
+						geometry: {
+							type: 'Point',
+							coordinates: [
+							  lon3,
+							  lat3
+							]
+						},
+						properties: {
+							title: "Rohit Mandalapu",
+							description: rohitStrings[Math.floor(Math.random()*rohitStrings.length)],
+							'marker-size': 'large',
+							'marker-color': '#00CC00',
+							'marker-symbol': 'pitch'
+						}
+					}).addTo(map);
+				})	
+			}
 		</script>
 	</body>
 	<script>
