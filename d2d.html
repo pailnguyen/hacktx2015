@@ -25,10 +25,9 @@
 		<div class="container">
 			<header>
 				<div class="title">Distance to RotMan</div>
-				<div id="distance">
-					<div id="info1" class="distanceInfo"></div>
-					<div id="info2" class="distanceInfo"></div>
-				</div>
+				<div id="distance"></div>
+				<div id="info1" class="distanceInfo"></div>
+				<div id="info2" class="distanceInfo"></div>
 			</header>
 			<section class="content">
 				<div id="map"></div>
@@ -48,10 +47,10 @@
 					}
 					else {
 						console.log("case 2");
+						run();
 						var div = document.getElementById("distance");
 						div.innerHTML = "<p>The most advanced application of HackTX 2015. If you are on a smartphone/tablet, please add this web app to your home screen to begin.</p>";
-						var mapDiv = document.getElementById("map");
-						mapDiv.style.height = "0px";
+						run();
 					}
 				}
 				else if(navigator.geolocation) {
@@ -119,7 +118,7 @@
 								description: "Wandering around campus. Go find him!",
 								'marker-size': 'large',
 								'marker-color': '#0000BB',
-								'marker-symbol': 'star'
+								'marker-symbol': 'cross'
 							}
 						}).addTo(map);
 						// Rohit
@@ -137,7 +136,7 @@
 								description: "Enjoying a nice day at UT.",
 								'marker-size': 'large',
 								'marker-color': '#00CC00',
-								'marker-symbol': 'star'
+								'marker-symbol': 'pitch'
 							}
 						}).addTo(map);
 					})	
